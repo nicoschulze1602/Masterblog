@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Flask Blog</title>
+    <title>Masterblog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Welcome to My Flask Blog!</h1>
 
-    <a href="{{ url_for('add') }}">➕ add a new post</a>
+    <a href="{{ url_for('add') }}" class="func-button">➕ add a new post</a>
 
     {% for post in posts %}
         <div class="post">
-            <h2>{{ post.title }}</h2>
-            <p>{{ post.content }}</p>
-            <small><strong>from:</strong> {{ post.author }}</small>
+            <div class="post-header">
+                <h2>{{ post.title }}</h2>
+                <p style="margin-left: 50px; background-color: #f3f3f3;
+                 padding: 25px; border-radius: 5px; text-align: left;">{{ post.content }}</p>
+            </div>
+            <div class="post-footer">
+                <small>
+                    from {{ post.author }}
+                    {% if post.date %} on {{ post.date }}{% endif %}
+                </small>
+                {% if post.time %}
+                    <span style="float: right; color: gray;">{{ post.time }}</span>
+                {% endif %}
+            </div>
         </div>
     {% endfor %}
 </body>

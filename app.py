@@ -1,4 +1,5 @@
 import os.path
+from datetime import datetime
 
 from flask import Flask, render_template, request, redirect
 import json
@@ -40,13 +41,23 @@ def add():
             "id": generate_user_id(blogposts),
             "autor": request.form.get("author"),
             "title": request.form.get("title"),
-            "content": request.form.get("content")
+            "content": request.form.get("content"),
+            "date": datetime.now().strftime("%d-%m-%Y"),
+            "time": datetime.now().strftime("%H:%M:%S")
         }
+
         blogposts.append(new_blogpost)
         save_blogposts(blogposts)
         return redirect('/')
 
     return render_template('add.html')
+
+
+@app.route('/delete/<int:post_id>')
+def delete(post_id):
+    # Find the blog post with the given id and remove it from the list
+    # Redirect back to the home page
+    pass
 
 
 if __name__ == '__main__':

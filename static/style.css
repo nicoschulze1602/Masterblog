@@ -8,13 +8,30 @@ body {
 h1 {
     text-align: center;
     color: #4F4F4F;
+    margin-bottom: 30px;
+}
+
+.func-button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.func-button:hover {
+    background-color: #e6e6e6;
 }
 
 .post {
     background-color: #FFF;
     border: 1px solid #DDD;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-top: 30px;
     border-radius: 8px;
 }
 
