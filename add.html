@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        form div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>add a new post:</h1>
+    <form action="/add" method="post">
+        <div>
+            <label for="author">from:</label>
+            <input type="text" id="author" name="author" required>
+        </div>
+        <br>
+        <div>
+            <label for="title">title:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <br>
+        <div>
+            <label for="content">content:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+        </div>
+        <br>
+        <button type="submit">save</button>
+    </form>
+</body>
+</html>

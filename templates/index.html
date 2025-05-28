@@ -9,11 +9,13 @@
 <body>
     <h1>Welcome to My Flask Blog!</h1>
 
+    <a href="{{ url_for('add') }}">➕ add a new post</a>
+
     {% for post in posts %}
         <div class="post">
-            <h2>Post: {{ post.title }}</h2>
-            <p><strong>Author:</strong> {{ post.author }}</p>
-            <p><strong>Content:</strong> {{ post.content }}</p>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            <small><strong>from:</strong> {{ post.author }}</small>
         </div>
     {% endfor %}
 </body>
