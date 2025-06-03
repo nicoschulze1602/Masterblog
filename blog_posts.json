@@ -1,11 +1,5 @@
 [
     {
-        "id": 1,
-        "author": "John Doe",
-        "title": "First Post",
-        "content": "This is my first post."
-    },
-    {
         "id": 2,
         "author": "Jane Doe",
         "title": "Second Post",
@@ -13,7 +7,7 @@
     },
     {
         "id": 3,
-        "autor": "Nico Schulze",
+        "author": "Nico Schulze",
         "title": "test post #1",
         "content": "lang lebe BastiGHG 🙌🏼"
     }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post bearbeiten</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Post bearbeiten</h1>
+
+    <form action="{{ url_for('update', post_id=post.id) }}" method="post" class="post-form">
+        <label for="author">Autor:</label><br>
+        <input type="text" id="author" name="author" value="{{ post.author }}"><br><br>
+
+        <label for="title">Titel:</label><br>
+        <input type="text" id="title" name="title" value="{{ post.title }}"><br><br>
+
+        <label for="content">Inhalt:</label><br>
+        <textarea id="content" name="content" rows="10" cols="50">{{ post.content }}</textarea><br><br>
+
+        <button type="submit">✅ Änderungen speichern</button>
+    </form>
+
+    <div class="back-link">
+        <a href="{{ url_for('index') }}">🔙 Zurück zur Übersicht</a>
+    </div>
+
+</body>
+</html>

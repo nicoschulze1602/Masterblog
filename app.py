@@ -20,7 +20,7 @@ def save_blogposts(blogposts):
         json.dump(blogposts, file, indent=4, ensure_ascii=False)
 
 
-def generate_user_id(blogposts):
+def generate_post_id(blogposts):
     if not blogposts:
         return 1
     return max(post["id"] for post in blogposts) + 1
@@ -38,11 +38,11 @@ def add():
         blogposts = load_blogposts()
 
         new_blogpost = {
-            "id": generate_user_id(blogposts),
-            "autor": request.form.get("author"),
+            "id": generate_post_id(blogposts),
+            "author": request.form.get("author"),
             "title": request.form.get("title"),
             "content": request.form.get("content"),
-            "date": datetime.now().strftime("%d-%m-%Y"),
+            "date": datetime.now().strftime("%d.%m.%Y"),
             "time": datetime.now().strftime("%H:%M:%S")
         }
 
@@ -53,11 +53,31 @@ def add():
     return render_template('add.html')
 
 
-@app.route('/delete/<int:post_id>')
+@app.route('/delete/<int:post_id>', methods=['POST'])
 def delete(post_id):
-    # Find the blog post with the given id and remove it from the list
-    # Redirect back to the home page
-    pass
+    blogposts = load_blogposts()
+    blogposts = [post for post in blogposts if post["id"] != post_id]
+    save_blogposts(blogposts)
+    return redirect('/')
+
+
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+    blogposts = load_blogposts()
+    post = next((p for p in blogposts if p["id"] == post_id), None)
+    if post is None:
+        return "Post not found", 404
+
+    if request.method == 'POST':
+        post["author"] = request.form.get("author")
+        post["title"] = request.form.get("title")
+        post["content"] = request.form.get("content")
+        post["date"] = datetime.now().strftime("%d.%m.%Y")
+        post["time"] = datetime.now().strftime("%H:%M:%S")
+        save_blogposts(blogposts)
+        return redirect('/')
+
+    return render_template('update.html', post=post)
 
 
 if __name__ == '__main__':

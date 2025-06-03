@@ -2,32 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masterblog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <h1>Welcome to My Flask Blog!</h1>
 
-    <a href="{{ url_for('add') }}" class="func-button">➕ add a new post</a>
+    <div class="add-post-wrapper">
+        <a href="{{ url_for('add') }}" class="add-post-button">➕ add a new post</a>
+    </div>
 
     {% for post in posts %}
         <div class="post">
             <div class="post-header">
-                <h2>{{ post.title }}</h2>
-                <p style="margin-left: 50px; background-color: #f3f3f3;
-                 padding: 25px; border-radius: 5px; text-align: left;">{{ post.content }}</p>
-            </div>
-            <div class="post-footer">
-                <small>
-                    from {{ post.author }}
-                    {% if post.date %} on {{ post.date }}{% endif %}
+                <strong class="post-title">{{ post.title }}</strong>
+                <small class="post-meta">
+                    – from {{ post.author }}{% if post.date %} on {{ post.date }}{% endif %}
                 </small>
-                {% if post.time %}
-                    <span style="float: right; color: gray;">{{ post.time }}</span>
-                {% endif %}
+                <form action="{{ url_for('delete', post_id=post.id) }}" method="post" class="delete-form">
+                    <button type="submit" class="delete-button">🗑</button>
+                </form>
+                <form action="{{ url_for('update', post_id=post.id) }}" method="get" class="edit-form">
+                    <button type="submit" class="edit-button">✏️</button>
+                </form>
             </div>
+
+            <div class="post-content">
+                {{ post.content }}
+            </div>
+
+            {% if post.time %}
+                <div class="post-time">
+                    {{ post.time }}
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
+
 </body>
 </html>
