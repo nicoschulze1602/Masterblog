@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ef4f974-ed53-4869-a2b8-3ec76b899746" name="Changes" comment="improve HTML optics and add structure to the post-components.">
-      <change afterPath="$PROJECT_DIR$/templates/update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Masterblog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Masterblog.iml" afterDir="false" />
+    <list default="true" id="1ef4f974-ed53-4869-a2b8-3ec76b899746" name="Changes" comment="Add Update route and improve visualisation.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog_posts.json" beforeDir="false" afterPath="$PROJECT_DIR$/blog_posts.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/update.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,13 +102,22 @@
       <option name="project" value="LOCAL" />
       <updated>1748439021545</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Update route and improve visualisation.">
+      <option name="closed" value="true" />
+      <created>1748993726892</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748993726892</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second commit" />
     <MESSAGE value="Create an 'add.html' template-file for POST Requests and an @app.route to handle.&#10;I also implemented some helper functions to simplify the posting process and create a unique user id." />
     <MESSAGE value="improve HTML optics and add structure to the post-components." />
-    <option name="LAST_COMMIT_MESSAGE" value="improve HTML optics and add structure to the post-components." />
+    <MESSAGE value="Add Update route and improve visualisation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Update route and improve visualisation." />
   </component>
 </project>

@@ -10,5 +10,41 @@
         "author": "Nico Schulze",
         "title": "test post #1",
         "content": "lang lebe BastiGHG 🙌🏼"
+    },
+    {
+        "id": 4,
+        "author": "Nico",
+        "title": "I Love Posting ",
+        "content": "dieserTextistLangdieserTextistLangdieserTextistLangdieserTextistLangdieserTextistLang dieserTextistLangdieserTextistLangdieserTextistLang dieserTextistLang",
+        "date": "04.06.2025",
+        "time": "01:58:31"
+    },
+    {
+        "id": 5,
+        "author": "Ash Ketchum",
+        "title": "Catch them all! ",
+        "content": "Got a shiny Evoli today! Which evo looks nice? ",
+        "date": "04.06.2025",
+        "time": "09:49:18",
+        "comments": [
+            "Psyana!",
+            "i like shiny flamara"
+        ]
+    },
+    {
+        "id": 6,
+        "author": "Mr. Krabs",
+        "title": "statement",
+        "content": "[̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ich liebe Moneten :-) [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]\r\n",
+        "date": "04.06.2025",
+        "time": "02:06:33"
+    },
+    {
+        "id": 7,
+        "author": "Kristina ohne Nachnamen",
+        "title": "LG",
+        "content": "Hallo Buba <3",
+        "date": "04.06.2025",
+        "time": "02:05:55"
     }
 ]

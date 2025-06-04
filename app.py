@@ -14,6 +14,22 @@ def load_blogposts():
     with open(BLOGPOSTS, 'r', encoding='utf-8') as file:
         return json.load(file)
 
+@app.route('/comment/<int:post_id>', methods=['POST'])
+def comment(post_id):
+    blogposts = load_blogposts()
+    for post in blogposts:
+        if post["id"] == post_id:
+            comment_text = request.form.get("comment")
+            if comment_text:
+                timestamp = datetime.now().strftime("%d.%m.%Y %H:%M")
+                comment_entry = {
+                    "text": comment_text,
+                    "timestamp": timestamp
+                }
+                post.setdefault("comments", []).append(comment_entry)
+            break
+    save_blogposts(blogposts)
+    return redirect('/')
 
 def save_blogposts(blogposts):
     with open(BLOGPOSTS, 'w', encoding='utf-8') as file:
@@ -43,7 +59,8 @@ def add():
             "title": request.form.get("title"),
             "content": request.form.get("content"),
             "date": datetime.now().strftime("%d.%m.%Y"),
-            "time": datetime.now().strftime("%H:%M:%S")
+            "time": datetime.now().strftime("%H:%M:%S"),
+            "likes": 0
         }
 
         blogposts.append(new_blogpost)
@@ -78,6 +95,17 @@ def update(post_id):
         return redirect('/')
 
     return render_template('update.html', post=post)
+
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def like(post_id):
+    blogposts = load_blogposts()
+    for post in blogposts:
+        if post["id"] == post_id:
+            post["likes"] = post.get("likes", 0) + 1
+            break
+    save_blogposts(blogposts)
+    return redirect('/')
 
 
 if __name__ == '__main__':
