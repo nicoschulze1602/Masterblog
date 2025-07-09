@@ -9,7 +9,7 @@
             max-width: 600px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #f5f7fa;
             color: #333;
         }
         form div {
@@ -40,27 +40,54 @@
         button:hover {
             background-color: #45a049;
         }
+        .cancel-button {
+            display: inline-block;
+            background-color: #ccc;
+            color: #333;
+            text-decoration: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            height: 40px;
+            box-sizing: border-box;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .cancel-button:hover {
+            background-color: #bbb;
+        }
     </style>
 </head>
 <body>
-    <h1>add a new post:</h1>
-    <form action="/add" method="post">
-        <div>
-            <label for="author">from:</label>
-            <input type="text" id="author" name="author" required>
-        </div>
-        <br>
-        <div>
-            <label for="title">title:</label>
-            <input type="text" id="title" name="title" required>
-        </div>
-        <br>
-        <div>
-            <label for="content">content:</label>
-            <textarea id="content" name="content" rows="5" required></textarea>
-        </div>
-        <br>
-        <button type="submit">save</button>
-    </form>
+    <h1>{{ 'Update Blog Post' if post else 'Write a new Blogpost 🖊️' }}</h1>
+    <div class="form-container">
+        <form action="{{ url_for('update', post_id=post['id']) if post else url_for('add') }}" method="post">
+            <div>
+                <label for="author">Autor:</label>
+                <input type="text" id="author" name="author" value="{{ post['author'] if post else '' }}" required>
+            </div>
+            <br>
+            <div>
+                <label for="title">Header:</label>
+                <input type="text" id="title" name="title" value="{{ post['title'] if post else '' }}" required>
+            </div>
+            <br>
+            <div>
+                <label for="content">Content:</label>
+                <textarea id="content" name="content" rows="5" required>{{ post['content'] if post else '' }}</textarea>
+            </div>
+            <br>
+            <button type="submit">{{ '✏️ Update Post' if post else '➕ Create Post' }}</button>
+            <a href="/" class="cancel-button">🔙 Cancel</a>
+        </form>
+    </div>
 </body>
 </html>

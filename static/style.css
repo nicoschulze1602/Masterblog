@@ -1,25 +1,61 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f2f5;
+    margin: 0;
     padding: 20px;
     color: #333;
+    line-height: 1.6;
 }
 
+/* Header Styles */
 h1 {
     text-align: center;
     color: #2c3e50;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 32px;
+    letter-spacing: 1px;
 }
 
-/* Add Button */
-.add-post-wrapper {
+/* Site Description */
+.site-description {
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
 }
 
-.add-post-button {
-    background-color: #1da1f2;
-    color: white;
+/* Main Action Bar Styles */
+.main-actions-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Responsive Styles for Main Action Bar */
+@media (min-width: 768px) {
+    .main-actions-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 30px;
+    }
+}
+
+/* General Button Styles */
+.btn {
     padding: 12px 20px;
     border: none;
     border-radius: 25px;
@@ -27,43 +63,104 @@ h1 {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    line-height: 1;
 }
 
-.add-post-button:hover {
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #1da1f2;
+    color: white;
+}
+
+.btn-primary:hover {
     background-color: #0d8ddb;
 }
 
-/* Post Container */
-.post {
-    background-color: #ffffff;
-    border: 1px solid #dcdcdc;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+/* Secondary Buttons */
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
 }
 
-/* Post Header */
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Sort and Refresh Button Group */
+.sort-and-refresh-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Post Container Styles */
+.post {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 700px;
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.post:hover {
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
+}
+
+/* Post Header Styles */
+.post-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
 .post-title {
     font-size: 20px;
     color: #2c3e50;
 }
+
 .post-meta {
     color: #7f8c8d;
     font-size: 13px;
+    margin-right: auto;
 }
 
-/* Highlight Content */
+.post-author {
+    font-weight: bold;
+    color: #444;
+}
+
+/* Post Content Styles */
 .post-content {
     background-color: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
     margin-top: 10px;
+    color: #555;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
-/* Time Bottom Right */
+/* Post Time Display */
 .post-time {
     text-align: right;
     color: #999;
@@ -71,74 +168,248 @@ h1 {
     margin-top: 10px;
 }
 
-/* Buttons */
+/* Action Buttons within Post (Delete, Edit) */
 .delete-form, .edit-form {
-    position: absolute;
-    top: 10px;
+    position: relative;
+    flex-shrink: 0;
 }
-.delete-form {
-    right: 10px;
-}
-.edit-form {
-    right: 50px;
-}
+
+/* Base Style for Post Action Buttons */
 .delete-button, .edit-button {
     background: none;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.1em;
+    color: #777;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
+
 .delete-button:hover {
+    color: #e74c3c;
+    transform: scale(1.1);
     background-color: #facaca;
 }
+
 .edit-button:hover {
+    color: #3498db;
+    transform: scale(1.1);
     background-color: #c9c9c9;
 }
-.like-form {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
 
-.comment-form {
-    margin-top: 10px;
-}
-
-.comments {
+/* Post Footer Actions: Comment Links and Like Button */
+.post-actions-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-top: 15px;
-    padding-left: 15px;
-    background-color: #f3f3f3;
-    border-radius: 8px;
-    padding: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
-.comments ul {
-    list-style-type: disc;
-    margin: 0;
-    padding-left: 20px;
+
+/* Group for Comment Toggle and Write Comment Link */
+.comment-actions-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-.comment-section {
-    display: none;
-    margin-top: 10px;
-    background-color: #f3f3f3;
-    padding: 10px;
-    border-radius: 8px;
-}
+
+/* Comment Toggle Link */
 .comment-toggle {
+    margin-top: 0; /* Managed by parent flexbox */
+    margin-bottom: 5px; /* Spacing for 'Write a comment' link */
+    margin-left: 30px;
+    font-size: 0.75em;
     color: #1da1f2;
     cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
     display: inline-block;
-}
-.comment-form input {
-    width: 80%;
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.comment-form button {
     padding: 5px 10px;
-    margin-left: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
 }
+
+.comment-toggle:hover {
+    background-color: #e6f7ff;
+}
+
+/* Write Comment Link */
+.write-comment-link {
+    display: block; /* Ensures it takes a new line */
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 1.1em;
+    color: #007bff;
+    text-decoration: none;
+    padding: 0; /* No horizontal padding */
+    text-align: left;
+    border-radius: 5px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.write-comment-link:hover {
+    background-color: transparent;
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Like Button Styling */
+.like-form {
+    position: static; /* Remove absolute positioning */
+    margin-top: 0; /* Managed by parent flexbox */
+    margin-left: auto; /* Pushes to the far right in flex container */
+    align-self: flex-end; /* Aligns to the bottom of the flex container */
+}
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.3em; /* Larger heart icon */
+    color: #ccc; /* Default grey for unliked */
+    font-weight: bold;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-button.liked {
+    color: #e74c3c; /* Red for liked */
+}
+
+.like-button:hover {
+    transform: scale(1.1);
+    color: #e74c3c; /* Ungeliked Herz wird auch rot beim Hover */
+}
+.like-button.liked:hover {
+    color: #e74c3c; /* Aktives Herz bleibt rot */
+}
+
+/* Comment Section Container */
+.comment-section {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* Comment List */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+/* Individual Comment Item */
+.comment-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.9em;
+}
+
+.comment-text {
+    flex-grow: 1;
+    color: #333;
+}
+
+.comment-timestamp {
+    color: #999;
+    font-size: 0.85em;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+/* Comment Form */
+.comment-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.comment-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+}
+
+.comment-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment-form button:hover {
+    background-color: #218838;
+}
+
+/* Site Footer Styles */
+.site-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-size: 0.85em;
+    border-top: 1px solid #34495e;
+}
+
+.site-footer a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Flash Messages (Uncomment and use in HTML if needed)
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 20px auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.flashes li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.flashes li.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flashes li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+*/

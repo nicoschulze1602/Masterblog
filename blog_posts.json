@@ -3,13 +3,15 @@
         "id": 2,
         "author": "Jane Doe",
         "title": "Second Post",
-        "content": "This is another post."
+        "content": "This is another post.",
+        "likes": 15000
     },
     {
         "id": 3,
         "author": "Nico Schulze",
         "title": "test post #1",
-        "content": "lang lebe BastiGHG 🙌🏼"
+        "content": "lang lebe BastiGHG 🙌🏼",
+        "likes": 0
     },
     {
         "id": 4,
@@ -37,7 +39,14 @@
         "title": "statement",
         "content": "[̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ich liebe Moneten :-) [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]\r\n",
         "date": "04.06.2025",
-        "time": "02:06:33"
+        "time": "02:06:33",
+        "likes": 1,
+        "comments": [
+            {
+                "text": "GeldGeldGeldGeldGeld",
+                "timestamp": "09.07.2025 01:27:17"
+            }
+        ]
     },
     {
         "id": 7,
@@ -45,6 +54,65 @@
         "title": "LG",
         "content": "Hallo Buba <3",
         "date": "04.06.2025",
-        "time": "02:05:55"
+        "time": "02:05:55",
+        "comments": [
+            {
+                "text": "Hallo <3",
+                "timestamp": "09.07.2025 01:26:54"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "author": "Nico",
+        "title": "Whazzup",
+        "content": "Whats goin on here?? \r\n",
+        "date": "07.07.2025",
+        "time": "01:33:30",
+        "likes": 0
+    },
+    {
+        "id": 9,
+        "author": "Nicolo",
+        "title": "Weisheit des Tages",
+        "content": "Sag niemals Franz Kafka ohne die F's...",
+        "date": "07.07.2025",
+        "time": "04:20:24",
+        "likes": 0,
+        "comments": [
+            {
+                "text": "oh nein...",
+                "timestamp": "07.07.2025 10:34"
+            },
+            {
+                "text": "?",
+                "timestamp": "07.07.2025 10:41:39",
+                "time_ago": "just now"
+            }
+        ]
+    },
+    {
+        "id": 20250709012934765587,
+        "author": "01001110 01101001 01100011 01101111",
+        "title": "binary nico",
+        "content": "!/() /break / print(\"Hello\")         9876",
+        "date": "09.07.2025",
+        "time": "01:31:00",
+        "likes": 0,
+        "comments": [
+            {
+                "text": "nice, this works",
+                "timestamp": "09.07.2025 16:24:10"
+            }
+        ]
+    },
+    {
+        "id": 20250709162716146271,
+        "author": "Sergej Fährlich",
+        "title": "Mein Kaffee hat heute Morgen zurückgeblufft",
+        "content": "Ich hab ihn angeschaut. Er hat zurückgeglitzert. Wir haben uns geeinigt, heute nichts Produktives zu tun.",
+        "date": "09.07.2025",
+        "time": "16:27:16",
+        "likes": 1
     }
 ]

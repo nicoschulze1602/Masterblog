@@ -3,13 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Masterblog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Welcome to My Flask Blog!</h1>
+    <p class="site-description">Here, you can spill your thoughts, share your wildest experiences, crack a joke or two, or just drop anything on your mind. Found a post that tickles your fancy? Give it a like! Got something to add? Dive into the comments – maybe we get lively discussion!</p>
+    <div class="main-actions-bar">
+        <a href="{{ url_for('add') }}" class="btn btn-primary add-post-button" title="Add a new blog post">
+            <i class="fas fa-plus"></i> Add New Post
+        </a>
 
-    <div class="add-post-wrapper">
-        <a href="{{ url_for('add') }}" class="add-post-button">➕ add a new post</a>
+        <div class="sort-and-refresh-group">
+            {% if sort_order == 'asc' %}
+                <a href="{{ url_for('index', sort='desc') }}" class="btn btn-secondary sort-button" title="Sort by Newest">
+                    <i class="fas fa-sort-amount-down-alt"></i>
+                </a>
+            {% else %}
+                <a href="{{ url_for('index', sort='asc') }}" class="btn btn-secondary sort-button" title="Sort by Oldest">
+                    <i class="fas fa-sort-amount-up-alt"></i>
+                </a>
+            {% endif %}
+            <a href="{{ url_for('index') }}" class="btn btn-secondary refresh-button" title="Refresh Blogposts">
+                <i class="fas fa-sync-alt"></i>
+            </a>
+        </div>
     </div>
 
     {% for post in posts %}
@@ -17,13 +35,17 @@
             <div class="post-header">
                 <strong class="post-title">{{ post.title }}</strong>
                 <small class="post-meta">
-                    – from {{ post.author }}{% if post.date %} on {{ post.date }}{% endif %}
+                    – from <span class="post-author">{{ post.author }}</span>{% if post.date %} on {{ post.date }}{% endif %}
                 </small>
                 <form action="{{ url_for('delete', post_id=post.id) }}" method="post" class="delete-form">
-                    <button type="submit" class="delete-button">🗑</button>
+                    <button type="submit" class="delete-button" title="Delete Post">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </form>
                 <form action="{{ url_for('update', post_id=post.id) }}" method="get" class="edit-form">
-                    <button type="submit" class="edit-button">✏️</button>
+                    <button type="submit" class="edit-button" title="Edit Post">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
                 </form>
             </div>
 
@@ -31,46 +53,69 @@
                 {{ post.content }}
             </div>
 
-            {% if post.time %}
+            {% if post.time_ago %}
                 <div class="post-time">
-                    {{ post.time }}
+                    {{ post.time_ago }}
                 </div>
             {% endif %}
 
-            <div class="comment-toggle" onclick="toggleComments({{ post.id }})">
-                💬 {{ post.comments | length if post.comments else 0 }} comment(s)
-            </div>
+            <div class="post-actions-footer">
+                <div class="comment-actions-group">
+                    <div class="comment-toggle" data-post-id="{{ post.id }}">
+                        💬 {{ post.comments | length if post.comments else 0 }} comment(s)
+                    </div>
 
-            <!-- ✅ KORRIGIERT: style="display: none;" hinzugefügt -->
+                    <a href="#" class="write-comment-link" data-post-id="{{ post.id }}">
+                        Write a comment
+                    </a>
+                </div>
+
+                <form action="{{ url_for('like', post_id=post.id) }}" method="post" class="like-form">
+                    {% if session.liked_posts and post.id in session.liked_posts %}
+                        <button type="submit" class="like-button liked" title="Unlike Post">
+                            <i class="fas fa-heart"></i> {{ post.likes | default(0) }}
+                        </button>
+                    {% else %}
+                        <button type="submit" class="like-button" title="Like Post">
+                            <i class="far fa-heart"></i> {{ post.likes | default(0) }}
+                        </button>
+                    {% endif %}
+                </form>
+            </div>
             <div id="comments-{{ post.id }}" class="comment-section" style="display: none;">
                 {% if post.comments %}
-                    <ul>
+                    <ul class="comment-list">
                         {% for comment in post.comments %}
-                            <li>
-                                {% if comment.text %}
-                                    {{ comment.text }} <small style="color: #999;">({{ comment.timestamp }})</small>
-                                {% else %}
-                                    {{ comment }} <small style="color: #999;">(no timestamp)</small>
+                            <li class="comment-item">
+                                <span class="comment-text">
+                                    {% if comment.text %}
+                                        {{ comment.text }}
+                                    {% else %}
+                                        {{ comment }}
+                                    {% endif %}
+                                </span>
+                                {% if comment.timestamp %}
+                                    <span class="comment-timestamp">
+                                        {{ comment.timestamp.split(' ')[0] }}
+                                    </span>
                                 {% endif %}
                             </li>
                         {% endfor %}
                     </ul>
                 {% endif %}
 
-                <!-- Kommentarformular -->
                 <form action="{{ url_for('comment', post_id=post.id) }}" method="post" class="comment-form">
-                    <input type="text" name="comment" placeholder="write a comment..." required>
-                    <button type="submit">➤</button>
+                    <input type="text" name="comment" placeholder="Write a comment..." required>
+                    <button type="submit" title="Submit Comment">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
-
-            <form action="{{ url_for('like', post_id=post.id) }}" method="post" class="like-form">
-                <button type="submit">♥️ ({{ post.likes | default(0) }})</button>
-            </form>
         </div>
     {% endfor %}
 
     <script>
+        // Event Listener für Delete-Formulare (bleibt bei querySelectorAll, da diese Forms fest sind)
         document.querySelectorAll('.delete-form').forEach(form => {
             form.addEventListener('submit', function (event) {
                 const confirmed = confirm('Are you sure you want to delete this post?');
@@ -80,6 +125,30 @@
             });
         });
 
+        // Event Delegation für Kommentar-Funktionen (zentraler Listener)
+        document.body.addEventListener('click', function(event) {
+            let target = event.target; // Das Element, das geklickt wurde
+
+            // Finde das nächstgelegene Elternelement, das ein comment-toggle ist
+            let commentToggle = target.closest('.comment-toggle');
+            if (commentToggle) {
+                const postId = commentToggle.dataset.postId;
+                toggleComments(postId);
+                return; // Beende die Funktion, da wir das passende Element gefunden haben
+            }
+
+            // Finde das nächstgelegene Elternelement, das ein write-comment-link ist
+            let writeCommentLink = target.closest('.write-comment-link');
+            if (writeCommentLink) {
+                const postId = writeCommentLink.dataset.postId;
+                toggleCommentsAndScroll(postId);
+                event.preventDefault(); // Verhindere Standard-Link-Verhalten (Springen zum Anker #)
+                return;
+            }
+        });
+
+
+        // Funktion zum Ein-/Ausblenden der Kommentare
         function toggleComments(postId) {
             const section = document.getElementById('comments-' + postId);
             if (section.style.display === 'none' || section.style.display === '') {
@@ -88,6 +157,27 @@
                 section.style.display = 'none';
             }
         }
+
+        // Funktion zum Ein-/Ausblenden und Scrollen zum Kommentarfeld
+        function toggleCommentsAndScroll(postId) {
+            const section = document.getElementById('comments-' + postId);
+            // Sicherstellen, dass der Kommentarbereich sichtbar ist
+            if (section.style.display === 'none' || section.style.display === '') {
+                section.style.display = 'block';
+            }
+
+            // Das Input-Feld innerhalb des Kommentarbereichs finden
+            const commentInput = section.querySelector('input[name="comment"]');
+
+            if (commentInput) {
+                // Zum Input-Feld scrollen (geschmeidig) und den Fokus darauf setzen
+                commentInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                commentInput.focus();
+            }
+        }
     </script>
 </body>
+<footer class="site-footer">
+    <p>&copy; {{ now.year }} My Flask Blog. Made with &#x2764;&#xfe0f; by Nico :) </p>
+</footer>
 </html>
