@@ -1,8 +1,0 @@
-# Verhindert das Hochladen sensibler Daten
-.env
-
-# Bytecode-Ordner von Python
-__pycache__/
-
-# IDE-spezifische Dateien (falls du z. B. mit PyCharm arbeitest)
-.idea/
