@@ -6,7 +6,9 @@ import json
 
 app = Flask(__name__)
 import secrets
+from dotenv import load_dotenv
 
+load_dotenv()
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', secrets.token_hex(16))
 BLOGPOSTS = 'blog_posts.json'
 
